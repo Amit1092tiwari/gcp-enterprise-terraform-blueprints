@@ -1,0 +1,21 @@
+﻿name: 🐛 Bug Report
+description: Report an issue or broken Terraform configuration
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: "Thanks for reporting an issue in the Google Cloud Terraform blueprints!"
+  - type: input
+    id: module
+    attributes:
+      label: Affected Module
+      description: Which sample module contains the error? (e.g., cloud_run_service_connect_cloud_sql)
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: Describe what fails during terraform init/plan/apply.
+    validations:
+      required: true

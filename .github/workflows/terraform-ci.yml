@@ -1,0 +1,40 @@
+﻿name: Terraform Lint & Validation CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: Terraform Format & Syntax Validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.5.7
+
+      - name: Verify Terraform Formatting
+        run: terraform fmt -check -recursive
+
+      - name: Validate Core Sample Modules
+        run: |
+          modules=(
+            "cloud_run_service_custom_domain_mapping"
+            "cloud_run_service_traffic_split"
+            "cloud_run_service_connect_cloud_sql"
+            "cloudfunctions2_basic"
+            "autoscaler_instance_group"
+          )
+          for mod in "${modules[@]}"; do
+            if [ -d "$mod" ]; then
+              echo "==> Initializing and validating $mod..."
+              (cd "$mod" && terraform init -backend=false && terraform validate)
+            fi
+          done
