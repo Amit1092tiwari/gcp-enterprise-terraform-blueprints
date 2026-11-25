@@ -1,4 +1,4 @@
-﻿# ☁️ Google Cloud Platform Enterprise Infrastructure-as-Code (Terraform Blueprints)
+# ☁️ Google Cloud Platform Enterprise Infrastructure-as-Code (Terraform Blueprints)
 
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Terraform](https://img.shields.io/badge/Terraform-%3E%3D_1.0.0-623CE4?logo=terraform)](https://www.terraform.io/)
@@ -16,11 +16,11 @@ The following architecture illustrates the interconnected service topology provi
 
 ```mermaid
 flowchart TD
-    Client["🌐 Client / API Gateway / CDN"] -->|HTTPS (Custom Domain)| CloudArmor["🛡️ Cloud Armor & Cloud Load Balancer"]
+    Client["🌐 Client / API Gateway / CDN"] -->|"HTTPS (Custom Domain)"| CloudArmor["🛡️ Cloud Armor & Cloud Load Balancer"]
     
     subgraph EdgeServices ["Edge & Ingress Routing"]
         CloudArmor -->|Direct Ingress| CR_Public["Cloud Run (Public Entrypoint)"]
-        CloudArmor -->|Traffic Split (90/10 Canary)| CR_Revision["Cloud Run (Canary Revision)"]
+        CloudArmor -->|"Traffic Split (90/10 Canary)"| CR_Revision["Cloud Run (Canary Revision)"]
     end
 
     subgraph VPC_Fabric ["Enterprise VPC & Private Service Networking"]

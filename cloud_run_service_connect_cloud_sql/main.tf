@@ -63,7 +63,7 @@ resource "google_sql_database_instance" "mysql_instance" {
 resource "google_secret_manager_secret" "dbuser" {
   secret_id = "dbusersecret"
   replication {
-    automatic = true
+    auto {}
   }
   depends_on = [google_project_service.secretmanager_api]
 }
@@ -90,7 +90,7 @@ resource "google_secret_manager_secret_iam_member" "secretaccess_compute_dbuser"
 resource "google_secret_manager_secret" "dbpass" {
   secret_id = "dbpasssecret"
   replication {
-    automatic = true
+    auto {}
   }
   depends_on = [google_project_service.secretmanager_api]
 }
@@ -116,7 +116,7 @@ resource "google_secret_manager_secret_iam_member" "secretaccess_compute_dbpass"
 resource "google_secret_manager_secret" "dbname" {
   secret_id = "dbnamesecret"
   replication {
-    automatic = true
+    auto {}
   }
   depends_on = [google_project_service.secretmanager_api]
 }
